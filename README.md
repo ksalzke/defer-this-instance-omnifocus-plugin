@@ -1,6 +1,6 @@
 # About
 
-This is an Omni Automation solitary plug-in for OmniFocus that duplicates a repeating task to modify its defer date without affecting future instances"
+This is an Omni Automation solitary plug-in for OmniFocus that duplicates a repeating task to modify its defer date without affecting future instances
 
 _Please note that all scripts on my GitHub account (or shared elsewhere) are works in progress. If you encounter any issues or have any suggestions please let me know--and do please make sure you backup your database before running scripts from an amateur on the internet!_
 
