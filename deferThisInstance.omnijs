@@ -1,0 +1,38 @@
+/* global PlugIn duplicateTasks */
+/*{
+"type": "action",
+"targets": ["omnifocus"],
+"author": "Kaitlin Salzke",
+"identifier": "com.KaitlinSalzke.DeferThisInstance",
+"version": "1.0",
+"description": "Duplicates a repeating task to modify its defer date without affecting future instances",
+"label": "Defer This Instance",
+  "shortLabel": "Defer This Instance"
+}*/
+(() => {
+  const action = new PlugIn.Action(async (selection, sender) => {
+    const oTask = selection.tasks[0]
+
+    // prompt for new defer date
+    const form = new Form()
+    form.addField(new Form.Field.Date('deferDate', 'New Defer Date', null, null))
+    await form.show('Defer Until...', 'OK')
+
+    // make a non-repeating copy of the task
+    const nTask = duplicateTasks([oTask], oTask.before)[0]
+    nTask.repetitionRule = null
+    nTask.deferDate = form.values.deferDate
+
+    // skip the original task
+    oTask.drop(false)
+  })
+
+  action.validate = (selection, sender) => {
+    // available if a single repeating task is selected
+    return (
+      selection.tasks.length === 1 && selection.tasks[0].repetitionRule !== null
+    )
+  }
+
+  return action
+})()
