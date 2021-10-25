@@ -4,10 +4,11 @@
 "targets": ["omnifocus"],
 "author": "Kaitlin Salzke",
 "identifier": "com.KaitlinSalzke.DeferThisInstance",
-"version": "1.0",
+"version": "1.1",
 "description": "Duplicates a repeating task to modify its defer date without affecting future instances",
 "label": "Defer This Instance",
-  "shortLabel": "Defer This Instance"
+"shortLabel": "Defer This Instance",
+"image": "arrow.forward.square.fill"
 }*/
 (() => {
   const action = new PlugIn.Action(async (selection, sender) => {
