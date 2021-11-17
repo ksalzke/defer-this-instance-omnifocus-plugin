@@ -10,9 +10,9 @@ Refer to the 'issues' in this repo for known issues and planned changes/enhancem
 
 # Installation & Set-Up
 
-1. Click on the green `Clone or download` button above to download a `.zip` file of the file in this GitHub repository.
+1. Download the [latest release](https://github.com/ksalzke/defer-this-instance-omnifocus-plugin/releases/latest)
 2. Unzip the downloaded file.
-3. Move the `.omnifocusjs` file to your OmniFocus plug-in library folder.
+3. Move the `.omnifocusjs` file to your OmniFocus plug-in library folder (or open it to install).
 
 # Actions
 
