@@ -4,7 +4,7 @@
 "targets": ["omnifocus"],
 "author": "Kaitlin Salzke",
 "identifier": "com.KaitlinSalzke.DeferThisInstance",
-"version": "1.1",
+"version": "1.2",
 "description": "Duplicates a repeating task to modify its defer date without affecting future instances",
 "label": "Defer This Instance",
 "shortLabel": "Defer This Instance",
@@ -12,7 +12,7 @@
 }*/
 (() => {
   const action = new PlugIn.Action(async (selection, sender) => {
-    const oTask = selection.tasks[0]
+    const oTask = selection.tasks[0] || selection.projects[0].task
 
     // prompt for new defer date
     const form = new Form()
@@ -20,7 +20,8 @@
     await form.show('Defer Until...', 'OK')
 
     // make a non-repeating copy of the task
-    const nTask = duplicateTasks([oTask], oTask.before)[0]
+    const nTask = oTask.project === null ? duplicateTasks([oTask], oTask.before)[0] : duplicateSections([oTask.project], oTask.project.before)[0].task
+
     nTask.repetitionRule = null
     nTask.deferDate = form.values.deferDate
 
@@ -30,9 +31,9 @@
 
   action.validate = (selection, sender) => {
     // available if a single repeating task is selected
-    return (
-      selection.tasks.length === 1 && selection.tasks[0].repetitionRule !== null
-    )
+    const selected = [...selection.tasks, ...selection.projects.map(p => p.task)]
+
+    return selected.length === 1 && selected[0].repetitionRule !== null
   }
 
   return action
